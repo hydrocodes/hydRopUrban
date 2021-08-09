@@ -1,4 +1,4 @@
-# hydRopUrban: An R package for easy calculations in urban hydrology
+# hydRopUrban: An R package for preliminary design in urban hydrology
 <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" width="200">
 
 ## 1. What is hydRopUrban?
@@ -25,3 +25,12 @@ v 0.1.0 - August 9, 2021 (test version)
 ## 5. How to cite?
 
 Rau, P. 2021. hydRopUrban: An R package for easy calculations in urban hydrology. Github repository: https://github.com/hydrocodes/hydRopUrban
+
+## 6. References
+
+Caquot, A. (1941). Sur la quantite des eaux pluviales à écouler dans les agglomerations urbaines modernes. Comptes Rendus hebdomadaires des Séances de l’Académie des Sciences, 213(16), 509–515.
+
+Kuichling, E. (1889). The relation between the rainfall and the discharge of sewers in populous districts, Trans., ASCE, Vol. 20, pp. 1-60.
+
+Mulvany, T.J. (1851). On the use of self-registering rain and flood gauges in making observations of the relations of rain fall and of flood discharges in a given catchment, Proceedings of Institution of Civil Engineers of Ireland, 4, 18-33.
+
