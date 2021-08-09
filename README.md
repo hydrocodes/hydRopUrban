@@ -23,7 +23,7 @@ The `hydRopUrban` package must be installed from Github hydrocodes repository, f
 **Step 2**: In Rstudio console or on your script, please write 
 
 ```r
-devtools::install_github("hydrocodes/hydRopclim")
+devtools::install_github("hydrocodes/hydRopUrban")
 ```
 During the installation, please check in R console and skip other updates with an empty line or selecting option "None".
 
