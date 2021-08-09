@@ -1,4 +1,6 @@
-# hydRopUrban: An R package for easy calculations in urban hydrology 
+# hydRopUrban: An R package for easy calculations in urban hydrology
+<img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" width="200">
+
 ## 1. What is hydRopUrban?
 `hydRopUrban` is an R package for automating calculations in urban hydrology. `hydRopUrban` seeks to helping non-expert R users in the preliminar hydrological design of urban drainage infraestructure. 
 
