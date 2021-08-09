@@ -8,12 +8,12 @@
 Six main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
-- `rational()`: Estimation of discharges time series by the standard rational method with a triangular hydrograph with a recession of 1xTc, without considering a storm duration.
-- `rationalm()`: Estimation of discharges time series by the modified rational method with a triangular hydrograph with a recession of 1.5xTc, and considering a storm event duration.
-- `rationalu()`: Estimation of discharges time series by the universal rational method with a synthetic hydrograph for urban catchments.
-- `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting.
-- `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting.
-- `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge.
+- `rational()`: Estimation of discharges time series by the standard rational method with a triangular hydrograph with a recession of 1xTc, without considering a storm duration (Mulvany, 1851; Kuichling, 1889).
+- `rationalm()`: Estimation of discharges time series by the modified rational method with a triangular hydrograph with a recession of 1.5xTc, and considering a storm event duration (Poertner, 1974; Smith and Lee, 1984).
+- `rationalu()`: Estimation of discharges time series by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996).
+- `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
+- `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
+- `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
 
 ## 3. Credits
 `hydRopUrban` was developed by Pedro Rau. For any issue or suggestion please write to: pedro.rau.ing@gmail.com
@@ -28,9 +28,16 @@ Rau, P. 2021. hydRopUrban: An R package for easy calculations in urban hydrology
 
 ## 6. References
 
+ASCE (1996). Hydrology Handbook. ASCE Manual of Practice No. 28. New York, NY.
+
 Caquot, A. (1941). Sur la quantite des eaux pluviales à écouler dans les agglomerations urbaines modernes. Comptes Rendus hebdomadaires des Séances de l’Académie des Sciences, 213(16), 509–515.
 
 Kuichling, E. (1889). The relation between the rainfall and the discharge of sewers in populous districts, Trans., ASCE, Vol. 20, pp. 1-60.
 
 Mulvany, T.J. (1851). On the use of self-registering rain and flood gauges in making observations of the relations of rain fall and of flood discharges in a given catchment, Proceedings of Institution of Civil Engineers of Ireland, 4, 18-33.
 
+Poertner, H.G. (1974). Practices in Detention of Urban Stormwater Runoff. APWA Special Report No. 43. Washington, D. C.: American Public Works Association.
+
+Smith, A.A., Lee, K. (1984). The rational method revisited. Canadian Journal of Civil Engineering11(4): 854–862.
+
+USACE (1991). A Muskingum-Cunge channel flow routing method for drainage networks. TP-135.
