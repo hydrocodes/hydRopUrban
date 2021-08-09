@@ -15,18 +15,39 @@ The main functions are:
 - `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
 
-## 3. Credits
+## 3. How to install hydRopUrban?
+The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
+
+**Step 1**: In Rstudio, install `devtools` package from CRAN
+
+**Step 2**: In Rstudio console or on your script, please write 
+
+```r
+devtools::install_github("hydrocodes/hydRopclim")
+```
+During the installation, please check in R console and skip other updates with an empty line or selecting option "None".
+
+That’s all! Finally, do not forget call the package in your script.
+Example: `rationalu()`
+```r
+library(hydRopUrban)
+rationalu(data=database, dt=0.05)
+```
+Please, check tutorial folder for codelines examples and more details:
+https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
+
+## 4. Credits
 `hydRopUrban` was developed by Pedro Rau. For any issue or suggestion please write to: pedro.rau.ing@gmail.com
 
-## 4. Versions
+## 5. Versions
 
 v 0.1.0 - August 9, 2021 (test version)
 
-## 5. How to cite?
+## 6. How to cite?
 
-Rau, P. 2021. hydRopUrban: An R package for easy calculations in urban hydrology. Github repository: https://github.com/hydrocodes/hydRopUrban
+Rau, P. 2021. hydRopUrban: An R package for preliminary design in urban hydrology. Github repository: https://github.com/hydrocodes/hydRopUrban
 
-## 6. References
+## 7. References
 
 ASCE (1996). Hydrology Handbook. ASCE Manual of Practice No. 28. New York, NY.
 
