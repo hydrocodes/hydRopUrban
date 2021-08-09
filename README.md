@@ -12,3 +12,14 @@ The main functions are:
 - `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting.
 - `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting.
 - `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge.
+
+## 3. Credits
+`hydRopUrban` was developed by Pedro Rau. For any issue or suggestion please write to: pedro.rau.ing@gmail.com
+
+## 4. Versions
+
+v 0.1.0 - August 9, 2021 (test version)
+
+## 5. How to cite?
+
+Rau, P. 2021. hydRopUrban: An R package for easy calculations in urban hydrology. Github repository: https://github.com/hydrocodes/hydRopUrban
