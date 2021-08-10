@@ -2,7 +2,7 @@
 <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" width="200">
 
 ## 1. What is hydRopUrban?
-`hydRopUrban` is an R package for automating calculations in urban hydrology. `hydRopUrban` seeks to helping non-expert R users in the preliminar hydrological design of urban drainage infraestructure. 
+`hydRopUrban` is an R package for preliminary hydrological design of urban drainage infraestructure. `hydRopUrban` seeks to helping non-expert R users in automating calculations in urban hydrology. 
 
 ## 2. What is hydRopUrban for?
 Six main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
@@ -28,7 +28,8 @@ devtools::install_github("hydrocodes/hydRopUrban")
 During the installation, please check in R console and skip other updates with an empty line or selecting option "None".
 
 That’s all! Finally, do not forget call the package in your script.
-Example: `rationalu()`
+
+Example: Using `rationalu()` function
 ```r
 library(hydRopUrban)
 rationalu(data=database, dt=0.05)
