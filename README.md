@@ -1,4 +1,4 @@
-# hydRopUrban: An R package for preliminary urban hydrology design
+# hydRopUrban: An R package for preliminary urban hydrological design
 <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" width="200">
 
 ## 1. What is hydRopUrban?
