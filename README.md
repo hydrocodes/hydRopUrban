@@ -14,7 +14,7 @@ The main functions are:
 - `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
-- `pollutant()`: Estimation of pollutant discharge and concentration by wash-off from impervious areas (Akan and Houghtalen, 2003).
+- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious areas (Akan and Houghtalen, 2003).
 
 ## 3. How to install hydRopUrban?
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
