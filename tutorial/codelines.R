@@ -46,3 +46,13 @@ dt <- 0.05    #hr
 init <- 0    #m3/s
 output <- "D:/.../output2.txt"
 mcunge(inflow, Qo, To, Vo, L, m, dt, init)
+
+library(hydRopUrban)
+data <- read.table(file.choose(), header=T)
+inflow <- data$Discharge
+A <- 0.2023 #km2
+w <- 2131.88 #kg
+k <- 0.1811 #1/mm
+dt <- 0.05    #hr
+output <- "D:/.../output3.txt"
+pollutant(inflow, A, w, k, dt)
