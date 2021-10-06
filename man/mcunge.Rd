@@ -20,9 +20,9 @@ L: A numeric value: Travel length in m
 
 m: A numeric value: Q-A relationship exponent of the hydraulic section Q=e*A^m
 
-dt: A numeric value: Time interval in hours
+dt: A numeric value: Time interval same as inflow in hours
 
-init: A numeric value: Initial outflow discharge
+init: A numeric value: Initial outflow discharge in m3/s
 }
 \examples{
 mcunge(inflow=database3, Qo, To, Vo, L, m=1.33, dt=0.05, init)

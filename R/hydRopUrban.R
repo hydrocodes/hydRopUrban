@@ -159,7 +159,7 @@ S <- (sum(data$L)/sum((data$L)/sqrt(data$S)))^2
 Es <- sum(data$L)/sqrt(sum(data$A*10000))
 ms <- (Es/2)^(0.7*b)
 Qps <- ms*(k^(1/u))*(S^(v/u))*(c^(1/u))*(A^(w/u))
-df <- data.frame(c,S,A,L=sum(data$L))
+df <- data.frame(c,S,A,L=max(data$L))
 print(Qp)
 print(df)
 sprintf("Qpeak = %f m3/s", Qps)
@@ -188,7 +188,7 @@ df1 <- data.frame(L=data$L,Qp)
 Es <- df1$L[df1$Qp==max(Qp)]/sqrt(sum(data$A*10000))
 ms <- (Es/2)^(0.7*b)
 Qps <- ms*(k^(1/u))*(S^(v/u))*(c^(1/u))*(A^(w/u))
-df <- data.frame(c,S,A,L=max(data$L))
+df <- data.frame(c,S,A,L=sum(data$L))
 print(Qp)
 print(df)
 sprintf("Qpeak = %f m3/s", Qps)
@@ -224,4 +224,57 @@ mcunge <- function(inflow, Qo, To, Vo, L, m, dt, init){
   plot(time,inflow,type="l", lwd=2, xlab="Hours", ylab="Discharge (m3/s)")
   lines(time,outflow,type="l", lwd=2, lty=3)
   sprintf("Qpeak_in = %f m3/s, Qpeak_out = %f m3/s", max(inflow), max(outflow))
+}
+
+#' @title pollutant
+#' @description Estimation of pollutant discharge and concentration by wash-off from impervious areas.
+#' @param inflow A vector: Input hydrograph in m3/s
+#' @param A A numeric value: Unit drainage area in km²
+#' @param w A numeric value: Initial amount of solids accumulated prior to the rain in kg
+#' @param k A numeric value: Wash-off coefficient in 1/mm
+#' @param dt A numeric value: Time interval in hours
+#' @return Maximal pollutant discharge and minimal pollutant concentration, pollutegraphs and output file with time series in m3/s
+#' @examples pollutant(inflow, A, w, k, dt)
+#' @export
+pollutant <- function(inflow, A, w, k, dt)
+{ x <- seq(0,dt*(length(inflow)-1),dt)
+  r1 <- inflow*1000*3600/(A*1000000)
+  ra <- c()
+  deltaV <- c()
+  p1 <- c()
+  p1[1] <- w
+  deltaP <- c()
+  for (i in 1:length(inflow)) {
+    ra[i] <- (r1[i]+r1[i+1])/2
+    ra[length(inflow)] <- r1[length(inflow)]/2
+    deltaV[i] <- (inflow[i]+inflow[i+1])*dt*3600/2
+    deltaV[length(inflow)] <- inflow[length(inflow)]*dt*3600/2
+    p1[i+1] <- p1[i]*exp(-k*ra[i]*dt)
+    deltaP[i] <- p1[i]-p1[i+1]
+  }
+  C <- deltaP*1000/deltaV
+  W <- deltaP/dt
+  layout(matrix(c(1,2), nrow = 1), widths = c(1, 1), )
+  par(mar=c(4,4,2,4))
+  print(plot(x,W, type="l", lwd=2, xlab=" ", ylab=" ", col="black"))
+  axis(side=2, col="black")
+  mtext("Pollutant discharge (kg/hr)",side=2, col="black", line=2.5, font=2)
+  mtext("Hours", side=1, line=2)
+  par(new=TRUE)
+  print(plot(x,inflow, type="l", axes=FALSE, lwd=1, lty=3, xlab=" ", ylab=" "))
+  axis(4, col="black" )
+  mtext("Discharge (m3/s)", side=4, line=2)
+
+  print(plot(x,C, type="l", lwd=2, xlab=" ", ylab=" ", col="black"))
+  axis(side=2, col="black")
+  mtext("Pollutant concentration (mg/l)",side=2, col="black", line=2.5, font=2)
+  mtext("Hours", side=1, line=2)
+  par(new=TRUE)
+  print(plot(x,inflow, type="l", axes=FALSE, lwd=1, lty=3, xlab=" ", ylab=" "))
+  axis(4, col="black" )
+  mtext("Discharge (m3/s)", side=4, line=2)
+
+  df <- data.frame(Hours=x, Discharge=inflow, Pollutant_discharge=W, Pollutant_concentration=C)
+  write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
+  sprintf("Ppeak = %f kg/hr, Cmin = %f mg/l", max(W), min(C))
 }
