@@ -44,6 +44,7 @@ https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
 ## 5. Versions
 
 v 1.1 - October 06, 2021
+
 v 1.0 - August 11, 2021
 
 ## 6. How to cite?
