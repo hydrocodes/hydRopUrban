@@ -56,3 +56,12 @@ k <- 0.1811 #1/mm
 dt <- 0.05    #hr
 output <- "D:/.../output3.txt"
 pollutant(inflow, A, w, k, dt)
+
+library(hydRopUrban)
+int30 <- c(7.62,12.7,33.02,10.16,7.62,5.08)
+A <- 0.0121 #km2
+K <- 0.27 #tonnes/acre or tons/ha
+L <- 122 #m
+S <- 0.001 #m/m
+output <- "D:/.../output3.txt"
+pollutantp(int30, A=0.0121, K=0.27, L=122, S=0.001, C=0.003, Pf=1)
