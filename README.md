@@ -5,7 +5,7 @@
 `hydRopUrban` is an R package for preliminary hydrological design of urban drainage infraestructure. `hydRopUrban` seeks to help non-expert R users in automating calculations in urban hydrology. 
 
 ## 2. What is hydRopUrban for?
-Seven main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
+Eight main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
 - `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, without considering a storm duration (Mulvany, 1851; Kuichling, 1889).
@@ -14,7 +14,8 @@ The main functions are:
 - `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
-- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious areas (Akan and Houghtalen, 2003).
+- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003).
+- `pollutantp()`: Estimation of a pollutegraph by wash-off from pervious surfaces (Huber and Dickinson, 1988).
 
 ## 3. How to install hydRopUrban?
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
@@ -43,6 +44,8 @@ https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
 
 ## 5. Versions
 
+v 1.2 - January 25, 2022
+
 v 1.1 - October 06, 2021
 
 v 1.0 - August 11, 2021
@@ -58,6 +61,8 @@ Akan, A.O., Houghtalen, R.J. (2003). Urban hydrology, hydraulics and stormwater 
 ASCE (1996). Hydrology Handbook. ASCE Manual of Practice No. 28. New York, NY.
 
 Caquot, A. (1941). Sur la quantite des eaux pluviales à écouler dans les agglomerations urbaines modernes. Comptes Rendus hebdomadaires des Séances de l’Académie des Sciences, 213(16), 509–515.
+
+Huber, W.C., Dickinson, R.E. (1988). Stormwater Management Model. User’s Manual, Environmental Research Laboratory, EPA, USA.
 
 Kuichling, E. (1889). The relation between the rainfall and the discharge of sewers in populous districts, Trans., ASCE, Vol. 20, pp. 1-60.
 
