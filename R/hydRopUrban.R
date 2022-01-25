@@ -278,3 +278,37 @@ pollutant <- function(inflow, A, w, k, dt)
   write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
   sprintf("Ppeak = %f kg/hr, Cmin = %f mg/l", max(W), min(C))
 }
+
+#' @title pollutantp
+#' @description Estimation of pollutant discharge and concentration by wash-off from impervious areas.
+#' @param int30 A vector: Input 30-min intensities in mm/hr
+#' @param A A numeric value: Unit drainage area in km²
+#' @param K A numeric value: Soil erodibility factor in tonnes/acre or tons/ha
+#' @param L A numeric value: Flow length in m
+#' @param S A numeric value: Slope in the flow direction in m/m
+#' @param C A numeric value: Cropping management factor
+#' @param Pf A numeric value: Erosion control practice factor
+#' @return Maximal pollutant discharge and total load, pollutegraph and output file with time series in kg/hr
+#' @examples pollutantp(int30, A, K, L, S, C, Pf)
+#' @export
+pollutantp <- function(int30, A, K, L, S, C, Pf)
+{ x <- seq(0,0.5*(length(int30)-1),0.5)
+  E <- (9.16+3.31*log10(int30/25.4))*(int30/25.4)*0.5
+  i30 <- max(int30/25.4)
+  R <- E*i30
+  Ls <- (L*3.281)^0.5*(0.0076+0.53*S+0.76*S^2)
+  deltaP <- (2000/2.205)*(A*247.105)*R*K*Ls*C*Pf
+  W <- deltaP/0.5
+  par(mar=c(4,4,2,4))
+  print(plot(x,W, ylim = range(2*W), type="l", lwd=2, xlab=" ", ylab=" ", col="black"))
+  par(new = TRUE)
+  print(plot(x,int30, ylim = rev(range(2*int30)), type="h", axes=FALSE, lwd=1, xlab=" ", ylab=" ", col="black"))
+  axis(side=4)
+  mtext("Pollutant discharge (kg/hr)",side=2, col="black", line=2.5, font=2)
+  mtext("Intensity (mm/hr)",side=4, col="black", line=2.5, font=1)
+  mtext("Hours", side=1, line=2)
+
+  df <- data.frame(Hours=x, Pollutant_discharge=W)
+  write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
+  sprintf("Ppeak = %f kg/hr, Total load = %f kg", max(W), sum(W)*0.5)
+}

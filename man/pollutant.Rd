@@ -1,11 +1,11 @@
 \name{pollutant}
 \alias{pollutant}
-\title{pollutant: Empirical pollutant discharge and concentration by wash-off}
+\title{pollutant: Empirical pollutant discharge and concentration by wash-off from impervious surfaces}
 \usage{
 pollutant(inflow, A, w, k, dt)
 }
 \description{
-Estimation of pollutant discharge and concentration by wash-off from impervious areas.
+Estimation of pollutant discharge and concentration by wash-off from impervious surfaces.
 }
 \arguments{
 inflow: A vector: Input hydrograph in m3/s
