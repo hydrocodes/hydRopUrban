@@ -8,7 +8,7 @@
 Eight main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
-- `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, without considering a storm duration (Mulvany, 1851; Kuichling, 1889).
+- `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concetration (Mulvany, 1851; Kuichling, 1889).
 - `rationalm()`: Estimation of discharge hydrograph by the modified rational method with a triangular hydrograph with a recession of 1.5xTc, and considering a storm event duration (Poertner, 1974; Smith and Lee, 1984).
 - `rationalu()`: Estimation of discharge hydrograph by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996).
 - `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
