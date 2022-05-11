@@ -40,7 +40,7 @@ Please, check tutorial folder for codelines examples and more details:
 https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
 
 ## 4. Credits
-`hydRopUrban` was developed by Pedro Rau. For any issue or suggestion please write to: pedro.rau.ing@gmail.com
+`hydRopUrban` was developed by Pedro Rau at Water Research and Technology Center of Universidad de Ingenieria y Tecnologia (UTEC-CITA, Lima) . For any issue or suggestion please write to: pedro.rau.ing@gmail.com
 
 ## 5. Versions
 
