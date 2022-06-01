@@ -5,7 +5,7 @@
 `hydRopUrban` is an R package for preliminary hydrological design of urban drainage infraestructure. `hydRopUrban` seeks to help non-expert R users in automating calculations in urban hydrology. 
 
 ## 2. What is hydRopUrban for?
-Eight main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
+Nine main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
 - `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889).
@@ -14,6 +14,7 @@ The main functions are:
 - `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
 - `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
+- `convex()`: Outflow discharge through a channel routing by the Convex method (USDA-SCS, 1965).
 - `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003).
 - `pollutantp()`: Estimation of a pollutegraph by wash-off from pervious surfaces (Huber and Dickinson, 1988).
 
@@ -44,6 +45,8 @@ https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
 
 ## 5. Versions
 
+v 1.3 - May 31, 2022
+
 v 1.2 - January 25, 2022
 
 v 1.1 - October 06, 2021
@@ -73,3 +76,5 @@ Poertner, H.G. (1974). Practices in Detention of Urban Stormwater Runoff. APWA S
 Smith, A.A., Lee, K. (1984). The rational method revisited. Canadian Journal of Civil Engineering11(4): 854–862.
 
 USACE (1991). A Muskingum-Cunge channel flow routing method for drainage networks. TP-135.
+
+USDA-SCS (1965). TR-20, Computer program for project formulation-Hydrology, Washington DC.
