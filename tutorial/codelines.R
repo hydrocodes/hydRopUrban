@@ -48,6 +48,18 @@ output <- "D:/.../output2.txt"
 mcunge(inflow, Qo, To, Vo, L, m, dt, init)
 
 library(hydRopUrban)
+data <- read.table(file.choose(), header=TRUE)
+inflow <- data$Discharge
+Qo <- 0 #m3/s
+B <- 20 #m
+L <- 2500 #m
+S <- 0.0005 #slope
+n <- 0.05 #rugosity
+dt <- 0.1 #hr
+output <- "D:/.../output_convex.txt"
+convex(inflow, Qo, B, L, S, n, dt)
+
+library(hydRopUrban)
 data <- read.table(file.choose(), header=T)
 inflow <- data$Discharge
 A <- 0.2023 #km2
