@@ -226,6 +226,36 @@ mcunge <- function(inflow, Qo, To, Vo, L, m, dt, init){
   sprintf("Qpeak_in = %f m3/s, Qpeak_out = %f m3/s", max(inflow), max(outflow))
 }
 
+#' @title convex
+#' @description Hydrograph routing through a wide open channel
+#' @param inflow A vector: Input hydrograph in m3/s
+#' @param Qo A numeric value: Output initial discharge in m3/s
+#' @param B A numeric value: channel width in m
+#' @param L A numeric value: channel length in m
+#' @param S A numeric value: channel slope in m/m
+#' @param n A numeric value: Manning's roughness coefficient
+#' @param dt A numeric value: Time interval in hours
+#' @return Routed hydrograph and discharge time series
+#' @examples convex(inflow, Qo, B, L, S, n, dt)
+#' @export
+convex <- function (inflow, Qo, B, L, S, n, dt)
+{ Qpk <- max(inflow)
+  Q34 <- 3*Qpk/4
+  y34 <- (Q34*n)/(B*S^0.5)^0.6
+  CX <- 1.5*y34^(2/3)*S^0.5*dt*60*60/(n*L)
+  outflow <- rep(0, length(inflow))
+  outflow[1] <- Qo
+  for (i in 2:length(inflow)){
+    outflow[i] <- CX*inflow[i-1] + (1-CX)*outflow[i-1]
+  }
+  time <- seq(0,(length(inflow)-1)*dt,dt)
+  df <- data.frame(Hours=time, Outflow=outflow)
+  write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
+  plot(time,inflow,type="l", lwd=2, xlab="Hours", ylab="Discharge (m3/s)")
+  lines(time,outflow,type="l", lwd=2, lty=3)
+  sprintf("Qpeak_in = %f m3/s, Qpeak_out = %f m3/s", max(inflow), max(outflow))
+}
+
 #' @title pollutant
 #' @description Estimation of pollutant discharge and concentration by wash-off from impervious areas.
 #' @param inflow A vector: Input hydrograph in m3/s
