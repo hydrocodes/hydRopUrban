@@ -342,3 +342,97 @@ pollutantp <- function(int30, A, K, L, S, C, Pf)
   write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
   sprintf("Ppeak = %f kg/hr, Total load = %f kg", max(W), sum(W)*0.5)
 }
+
+#' @title idf24
+#' @description Estimation of Intensity-Duration-Frequency adjustment from SCS storms
+#' @param P24 A numeric value: Input design precipitation of 24hr in mm
+#' @param type An option: SCS storm type option (1,1a,2,3)
+#' @return Montana Intensity-Duration-Frequency equation and curve
+#' @examples idf24(P24, type)
+#' @export
+idf24 <- function(P24, type)
+{ scs1 <- c(0,0.0175,0.035,0.0555,0.076,0.1005,
+            0.125,0.156,0.194,0.254,0.515,0.624,
+            0.682,0.727,0.767,0.7985,0.83,0.854,
+            0.878,0.902,0.926,0.9445,0.963,0.9815,1)
+  scs1a <- c(0,0.025,0.05,0.083,0.116,0.161,0.206,
+           0.268,0.425,0.52,0.577,0.624,0.664,
+           0.701,0.736,0.768,0.8,0.8265,0.853,
+           0.8795,0.906,0.9295,0.953,0.9765,1)
+  scs2 <- c(0,0.011,0.022,0.035,0.048,0.064,0.08,
+          0.098,0.12,0.147,0.181,0.235,0.663,
+          0.772,0.82,0.85,0.88,0.898,0.916,0.934,
+          0.952,0.964,0.976,0.988,1)
+  scs3 <- c(0,0.01,0.02,0.0315,0.043,0.0575,0.072,
+          0.089,0.115,0.148,0.189,0.25,0.5,0.751,
+          0.811,0.8485,0.886,0.90375,0.9215,0.93925,
+          0.957,0.96775,0.9785,0.98925,1)
+if(type=="1") {
+  pacm <- P24*scs1
+  p <- c()
+  int2 <- c()
+  int3 <- c()
+  int4 <- c()
+  for (i in 1:24) {
+    p[i] <- pacm[i+1]-pacm[i]
+    int2[i] <- (p[i+2]+p[i+1])/2
+    int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
+    int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
+  }
+}
+else if(type=="1a") {
+  pacm <- P24*scs1a
+  p <- c()
+  int2 <- c()
+  int3 <- c()
+  int4 <- c()
+  for (i in 1:24) {
+    p[i] <- pacm[i+1]-pacm[i]
+    int2[i] <- (p[i+2]+p[i+1])/2
+    int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
+    int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
+  }
+}
+else if(type=="2"){
+  pacm <- P24*scs2
+  p <- c()
+  int2 <- c()
+  int3 <- c()
+  int4 <- c()
+  for (i in 1:24) {
+    p[i] <- pacm[i+1]-pacm[i]
+    int2[i] <- (p[i+2]+p[i+1])/2
+    int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
+    int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
+  }
+}
+else if(type=="3"){
+  pacm <- P24*scs3
+  p <- c()
+  int2 <- c()
+  int3 <- c()
+  int4 <- c()
+  for (i in 1:24) {
+    p[i] <- pacm[i+1]-pacm[i]
+    int2[i] <- (p[i+2]+p[i+1])/2
+    int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
+    int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
+  }
+}
+else
+stop(sQuote(x), " not implemented")
+ps <- max(p[!is.na(p)])
+int2s <- suppressWarnings(max(int2[!is.na(int2)]))
+int3s <- suppressWarnings(max(int3[!is.na(int3)]))
+int4s <- suppressWarnings(max(int4[!is.na(int4)]))
+int24 <- P24/24
+int24max <- c(ps, int2s, int3s, int4s, int24)
+D <- c(1,2,3,4,24)
+model <- suppressWarnings(lm(log(int24max) ~ log(D)))
+a <- exp(model$coefficients[1])
+b <- model$coefficients[2]
+x <- c(1:24)
+y <- a*x^b
+plot(x,y,type="l", lwd=2, xlab="Duration (hr)", ylab="Intensity (mm/hr)")
+sprintf("Intensity = a*Duration^b: a = %f, b = %f", a, b)
+}
