@@ -5,7 +5,7 @@
 `hydRopUrban` is an R package for preliminary hydrological design of urban drainage infraestructure. `hydRopUrban` seeks to help non-expert R users in automating calculations in urban hydrology. 
 
 ## 2. What is hydRopUrban for?
-Nine main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
+Ten main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
 - `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889).
@@ -17,6 +17,7 @@ The main functions are:
 - `convex()`: Outflow discharge through a channel routing by the Convex method (USDA-SCS, 1965).
 - `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003).
 - `pollutantp()`: Estimation of a pollutegraph by wash-off from pervious surfaces (Huber and Dickinson, 1988).
+- `idf24()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
 
 ## 3. How to install hydRopUrban?
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
@@ -76,5 +77,7 @@ Poertner, H.G. (1974). Practices in Detention of Urban Stormwater Runoff. APWA S
 Smith, A.A., Lee, K. (1984). The rational method revisited. Canadian Journal of Civil Engineering11(4): 854–862.
 
 USACE (1991). A Muskingum-Cunge channel flow routing method for drainage networks. TP-135.
+
+USDA-SCS (1986). Urban hydrology for small watersheds, tech release No 55. 
 
 USDA-SCS (1965). TR-20, Computer program for project formulation-Hydrology, Washington DC.
