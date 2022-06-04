@@ -77,3 +77,6 @@ L <- 122 #m
 S <- 0.001 #m/m
 output <- "D:/.../output3.txt"
 pollutantp(int30, A=0.0121, K=0.27, L=122, S=0.001, C=0.003, Pf=1)
+
+library(hydRopUrban)
+idf24(P24=48,type="1a")
