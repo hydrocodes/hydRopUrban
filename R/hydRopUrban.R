@@ -253,7 +253,7 @@ convex <- function (inflow, Qo, B, L, S, n, dt)
   write.table(df,file=output, sep = "\t", row.names = FALSE, col.names = TRUE)
   plot(time,inflow,type="l", lwd=2, xlab="Hours", ylab="Discharge (m3/s)")
   lines(time,outflow,type="l", lwd=2, lty=3)
-  sprintf("Qpeak_in = %f m3/s, Qpeak_out = %f m3/s", max(inflow), max(outflow))
+  sprintf("Qpeak_in = %f m3/s, Qpeak_out = %f m3/s, Routing_coef = %f", max(inflow), max(outflow), CX)
 }
 
 #' @title pollutant
