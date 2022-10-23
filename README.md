@@ -56,7 +56,7 @@ v 1.0 - August 11, 2021
 
 ## 6. How to cite?
 
-Rau, P. 2021. hydRopUrban: An R package for preliminary urban hydrological design. Github repository: https://github.com/hydrocodes/hydRopUrban
+Rau, P., Gutierrez, L., Callan, N. A tool in R for preliminary urban hydrological design. (accepted)
 
 ## 7. References
 
