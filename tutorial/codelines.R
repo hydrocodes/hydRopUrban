@@ -3,80 +3,46 @@
 # Edit input values
 
 library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-output <- "C:/.../output.txt"
-dt <- 0.05 
-rational(data,dt)
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-output <- "C:/.../output.txt"
-dt <- 0.05 
-D <- 2
-rationalm(data,D,dt)
+#rational()
+db_sbs <- read.csv('tutorial/database1.csv')
+qd_fl <- rational(crunoff = db_sbs$c, intensity = db_sbs$i, area =  db_sbs$A,
+                  time.con = db_sbs$Tc, delta.time = 0.05, path = 'C:/')
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-output <- "C:/.../output.txt"
-dt <- 0.05 
-rationalu(data,dt)
+qd_fl <- rational(crunoff = db_sbs$c, intensity = db_sbs$i, area = db_sbs$A,
+                  time.con = db_sbs$Tc, delta.time = 0.05, duration =  2, method = 'modified', path = 'C:/')
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-a <- 5
-b <- -0.6
-caquots(data,a,b)
+qd_fl <- rational(crunoff = db_sbs$c, intensity = db_sbs$i, area = db_sbs$A,
+                  time.con = db_sbs$Tc, delta.time = 0.02, method = 'universal')
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-a <- 5
-b <- -0.6
-caquotp(data,a,b)
+#caquot()
+db_sbs <- read.csv('tutorial/database2.csv')
+caquot(crunoff = db_sbs$c, slope = db_sbs$S, area =  db_sbs$A, longitud = db_sbs$L,
+       a = 5, b = -0.6, method = 'parallel', path = 'C:/')
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-inflow <- data$Discharge
-Qo <- 1.5 #m3/s
-Vo <- 2.1 #m/s
-So <- 0.01 #slope
-To <- 2 #m
-L <- 2500    #m
-m <- 1.31 # coefficient
-dt <- 0.05    #hr
-init <- 0    #m3/s
-output <- "D:/.../output2.txt"
-mcunge(inflow, Qo, To, Vo, L, m, dt, init)
+#routing()
+inflow <- qd_fl$Discharge
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=TRUE)
-inflow <- data$Discharge
-Qo <- 0 #m3/s
-B <- 20 #m
-L <- 2500 #m
-S <- 0.0005 #slope
-n <- 0.05 #rugosity
-dt <- 0.1 #hr
-output <- "D:/.../output_convex.txt"
-convex(inflow, Qo, B, L, S, n, dt)
+qr_mc <- routing(flow.in = inflow, flow.ref = 1.5, velocity = 2.1, slope = 0.01,
+                 channel = 20, longitud =  2500, flow.area = 1.31, flow.init = 0,
+                 delta.time = 0.05, method = 'mcunge', path = 'C:/')
 
-library(hydRopUrban)
-data <- read.table(file.choose(), header=T)
-inflow <- data$Discharge
-A <- 0.2023 #km2
-w <- 2131.88 #kg
-k <- 0.1811 #1/mm
-dt <- 0.05    #hr
-output <- "D:/.../output3.txt"
-pollutant(inflow, A, w, k, dt)
+qr_cv <- routing(flow.in = inflow, flow.init = 0, channel = 20, longitud = 2500,
+                 slope = 0.0005, cmanning = 0.05, delta.time = 0.1, method = 'convex', path = 'C:/')
 
-library(hydRopUrban)
+#pollutant
+inflow <- qd_fl$Discharge
+poll_imp <- pollutant(flow.in = inflow, area = 0.2023, solids = 2131.88,
+                      kc = 0.1811, delta.time = 0.05, method = 'impervious')
+
 int30 <- c(7.62,12.7,33.02,10.16,7.62,5.08)
-A <- 0.0121 #km2
-K <- 0.27 #tonnes/acre or tons/ha
-L <- 122 #m
-S <- 0.001 #m/m
-output <- "D:/.../output3.txt"
-pollutantp(int30, A=0.0121, K=0.27, L=122, S=0.001, C=0.003, Pf=1)
+poll_imp <- pollutant(intensity = int30, area = 0.0121, kt = 0.27,
+                      longitud = 122, slope = 0.001, delta.time = 0.05,
+                      coefficient=0.003, param = 1, method = 'pervious', path = 'C:/')
 
-library(hydRopUrban)
-idf24(P24=48,type="1a")
+#idf
+idf_df <- idf(precipitation =20, type="3", path = 'C:/')
+
+#lagtime
+ltm_df <- lagtime(area = 0.107, longitud = 0.115,
+                  slope = 7.414, altitudiff = 9.45)
