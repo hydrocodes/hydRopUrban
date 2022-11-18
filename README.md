@@ -8,16 +8,11 @@
 Ten main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are:
-- `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889).
-- `rationalm()`: Estimation of discharge hydrograph by the modified rational method with a triangular hydrograph with a recession of 1.5xTc, and considering a storm event duration (Poertner, 1974; Smith and Lee, 1984).
-- `rationalu()`: Estimation of discharge hydrograph by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996).
-- `caquots()`: Maximal discharge by Caquot's method for serial drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
-- `caquotp()`: Maximal discharge by Caquot's method for parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
-- `mcunge()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991).
-- `convex()`: Outflow discharge through a channel routing by the Convex method (USDA-SCS, 1965).
-- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003).
-- `pollutantp()`: Estimation of a pollutegraph by wash-off from pervious surfaces (Huber and Dickinson, 1988).
-- `idf24()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
+- `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889), and considering a storm event duration (Poertner, 1974; Smith and Lee, 1984), and with a synthetic hydrograph for urban catchments (ASCE, 1996).
+- `caquot()`: Maximal discharge by Caquot's method for serial and parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
+- `routing()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991), and the Convex method (USDA-SCS, 1965).
+- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003), and by wash-off from pervious surfaces (Huber and Dickinson, 1988).
+- `idf()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
 
 ## 3. How to install hydRopUrban?
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
@@ -46,13 +41,15 @@ https://github.com/hydrocodes/hydRopUrban/tree/main/tutorial
 
 ## 5. Versions
 
-v 1.3 - May 31, 2022
+v 1.0 - November 18, 2022
 
-v 1.2 - January 25, 2022
+v 0.4 - May 31, 2022
 
-v 1.1 - October 06, 2021
+v 0.3 - January 25, 2022
 
-v 1.0 - August 11, 2021
+v 0.2 - October 06, 2021
+
+v 0.1 - August 11, 2021
 
 ## 6. How to cite?
 

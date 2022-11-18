@@ -44,5 +44,6 @@ poll_imp <- pollutant(intensity = int30, area = 0.0121, kt = 0.27,
 idf_df <- idf(precipitation =20, type="3", path = 'C:/')
 
 #lagtime
-ltm_df <- lagtime(area = 0.107, longitud = 0.115,
-                  slope = 7.414, altitudiff = 9.45)
+sbs <- read.csv('tutorial/database_sbs.csv')
+
+ltm_df <- lagtime(area = sbs$area, longitud = sbs$lon, slope = sbs$spc, altitudiff = sbs$dfa)

@@ -75,7 +75,7 @@ rational <- function(crunoff = 0.95, intensity = 2.9, area = 0.57, time.con = 0.
   print(paste0("Qpeak = ", round(max(hy_df[,2]),2),
                " m3/s, Volume = ",round(sum(hy_df[,2])*dt*60*60,2)," m3"))
   plot(x = hy_df$Hours, y = hy_df$Discharge, type = 'l', lwd = 2,
-       ylab = 'Discharge [m3/s]', xlab = 'Tiempo [Hora]')
+       ylab = 'Discharge [m3/s]', xlab = 'Time [hr]')
   coll <- rainbow(length(Qp))
   for (i in 1:length(Qp)){lines(x = hy_df$Hours,y = hy_df[,2+i],col = coll[i],type = 'l') }
   hy_df$Hours <- format(hy_df$Hours, format = "%d %H:%M:%S")
@@ -201,7 +201,7 @@ routing <- function(flow.in = inflow, flow.ref = 1.5, velocity = 2.1, slope = 0.
   time <- seq(0,(length(qi)-1)*dt,dt)
   Qp <- data.frame(Hours=time, Inflow = qi, Outflow=outflow)
 
-  plot(x = Qp$Hours,y = Qp$Inflow,type="l", lwd=2, xlab="Hours", ylab="Discharge (m3/s)")
+  plot(x = Qp$Hours,y = Qp$Inflow,type="l", lwd=2, xlab="Time [hr]", ylab="Discharge [m3/s]")
   lines(x = Qp$Hours,y = Qp$Outflow,type="l", lwd=2, lty=3, col = 'red')
 
   Qp[,-1] <- round(Qp[,-1], 2)
@@ -258,27 +258,30 @@ pollutant <- function(flow.in = inflow, intensity = c(7.62,12.7,33.02,10.16,7.62
     W <- deltaP/dt
 
     par(mfrow =c(1,2))
+
+    layout(matrix(c(1,2), nrow = 1), widths = c(1, 1))
+    par(mar=c(4,4,2,4))
     plot(x,W, type="l", lwd=2, xlab=" ", ylab=" ", col="black")
     axis(side=2, col="black")
-    mtext("Pollutant discharge (kg/hr)",side=2, col="black", line=2.5, font=2)
-    mtext("Hours", side=1, line=2)
+    mtext("Pollutant discharge [kg/hr]",side=2, col="black", line=2.5, font=2)
+    mtext("Time [hr]", side=1, line=2)
     par(new=TRUE)
     plot(x,inflow, type="l", axes=F, lwd=1, lty=3, xlab=" ", ylab=" ", col = 'red')
     axis(4, col="black" )
     mtext("Discharge (m3/s)", side=4, line=2)
 
     plot(x,C, type="l", lwd=2, xlab=" ", ylab=" ", col="black")
-    mtext("Pollutant concentration (mg/l)",side=2, col="black", line=2.5, font=2)
-    mtext("Hours", side=1, line=2)
+    axis(side=2, col="black")
+    mtext("Pollutant concentration [mg/l]",side=2, col="black", line=2.5, font=2)
+    mtext("Time [hr]", side=1, line=2)
     par(new=TRUE)
     plot(x,qi, type="l", axes=FALSE, lwd=1, lty=3, xlab=" ", ylab=" ", col = 'red')
     axis(4, col="black" )
-    mtext("Discharge (m3/s)", side=4, line=2)
-    par(mfrow =c(1,1))
+    mtext("Discharge [m3/s]", side=4, line=2)
 
     df <- data.frame(Hours=x, Discharge=qi, Pollutant_discharge=W, Pollutant_concentration=C)
 
-    print(paste0("Ppeak = ", round(max(W),3), " kg/hr | Cmin = ",
+    print(paste0("Ppeak = ", round(max(W),3), " kg/hours | Cmin = ",
                  round(min(C, na.rm = T),3)," mg/l"))
     return(df)
   }
@@ -296,9 +299,9 @@ pollutant <- function(flow.in = inflow, intensity = c(7.62,12.7,33.02,10.16,7.62
     par(new = TRUE)
     plot(x,ip, ylim = rev(range(2*ip)), type="h", axes=FALSE, lwd=1, xlab=" ", ylab=" ", col="black")
     axis(side=4)
-    mtext("Pollutant discharge (kg/hr)",side=2, col="black", line=2.5, font=2)
-    mtext("Intensity (mm/hr)",side=4, col="black", line=2.5, font=1)
-    mtext("Hours", side=1, line=2)
+    mtext("Pollutant discharge [kg/hr]",side=2, col="black", line=2.5, font=2)
+    mtext("Intensity [mm/hr]",side=4, col="black", line=2.5, font=1)
+    mtext("Time [hr]", side=1, line=2)
     par(mfrow =c(1,1))
 
     df <- data.frame(Hours=x, Pollutant_discharge=W)
@@ -406,7 +409,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
   b <- model$coefficients[2]
   x <- c(1:24)
   y <- a*x^b
-  plot(x,y,type="l", lwd=2, xlab="Duration (hr)", ylab="Intensity (mm/hr)")
+  plot(x,y,type="l", lwd=2, xlab="Duration [hr]", ylab="Intensity [mm/hr]")
   sprintf("Intensity = a*Duration^b: a = %f, b = %f", a, b)
 
   if(class(path) == 'character' & nchar(path) > 2){
@@ -425,69 +428,82 @@ idf <- function(precipitation = 48, type = '1', path = NA){
 #' @examples lagtime(longitud, area, slope, altitudiff, path)
 #' @export
 
-lagtime <- function(longitud = lon, area =area, slope = spc, altitudiff = alt, path =NA){
-  L <- longitud
-  A <- area
-  S <- slope
-  H <- altitudiff
-  #tc
-  tc_brw <- 0.2426*(L/((A^0.1)*(S/100)^0.2)) #Bransby_Williams
+lagtime <- function(longitud = lon, area =area, slope = spc,
+                    altitudiff = alt, id = NA, path =NA){
+  if(class(id) != 'character'){
+    id <- 1:length(longitud)
+  }
+  tab_tm <- list()
+  for (i in 1:length(longitud)) {
+    L <- longitud[i]
+    A <- area[i]
+    S <- slope[i]
+    H <- altitudiff[i]
+    #tc
+    tc_brw <- 0.2426*(L/((A^0.1)*(S/100)^0.2)) #Bransby_Williams
 
-  tc_krp <- 0.4*0.0663*((L^2)/(S/100))^0.385#kirpich
+    tc_krp <- 0.4*0.0663*((L^2)/(S/100))^0.385#kirpich
 
-  tc_krb <- ifelse(L<=0.1 & A<=0.04 & S <= 1, 1.4394/60*((L*1000)*n/(S/100)^0.5)^0.467, NA)#kerby
+    tc_krb <- ifelse(L<=0.1 & A<=0.04 & S <= 1, 1.4394/60*((L*1000)*n/(S/100)^0.5)^0.467, NA)#kerby
 
-  tc_jhc <- ifelse(A >= 65, 0.0543*(L/(S/100))^0.5, NA) #Johnstone_Cross
+    tc_jhc <- ifelse(A >= 65, 0.0543*(L/(S/100))^0.5, NA) #Johnstone_Cross
 
-  tc_clf <- (60*((0.87075*(L)^3)/H)^0.385)/60 #california
+    tc_clf <- (60*((0.87075*(L)^3)/H)^0.385)/60 #california
 
-  tc_clk <- 0.335* (A/(S/100)^0.5)^0.593 #Clark
+    tc_clk <- 0.335* (A/(S/100)^0.5)^0.593 #Clark
 
-  tc_gnd<- (4*((A)^0.5)+1.5*L)/(25.3*(((S/100)*L)^0.5))
-  tc_gnd <- ifelse(L/3600 >= tc_gnd & tc_gnd >= (L/3600 +1.5), tc_gnd, NA) #Giandotti
+    tc_gnd<- (4*((A)^0.5)+1.5*L)/(25.3*(((S/100)*L)^0.5))
+    tc_gnd <- ifelse(L/3600 >= tc_gnd & tc_gnd >= (L/3600 +1.5), tc_gnd, NA) #Giandotti
 
-  tc_psn <- ifelse(0.04<=L/(A^0.5)&L/(A^0.5)<=0.13, abs(0.108*((A*L)^(1/3)))/((S/100)^0.5), NA) #Passini
+    tc_psn <- ifelse(0.04<=L/(A^0.5)&L/(A^0.5)<=0.13, abs(0.108*((A*L)^(1/3)))/((S/100)^0.5), NA) #Passini
 
-  tc_tmz <- 0.3*(L/((S/100)^0.25))^0.76 #Temez
+    tc_tmz <- 0.3*(L/((S/100)^0.25))^0.76 #Temez
 
-  tc_prz <- L/(72*((H/L)^0.6))#perez
+    tc_prz <- L/(72*((H/L)^0.6))#perez
 
-  tc_plg <- 0.76*((A)^0.38)#pilgrim
+    tc_plg <- 0.76*((A)^0.38)#pilgrim
 
-  tc_usb <- ifelse(A >= 1, 2-0.5*log10(A), 2)*((0.87*L^2)/(1000*(S/100)))^0.385#USBR
+    tc_usb <- ifelse(A >= 1, 2-0.5*log10(A), 2)*((0.87*L^2)/(1000*(S/100)))^0.385#USBR
 
-  tc_val <- 1.7694*((A)^0.325)*((L)^-0.096)*((S)^-0.290)#valencia zuluaga
+    tc_val <- 1.7694*((A)^0.325)*((L)^-0.096)*((S)^-0.290)#valencia zuluaga
 
-  tc_vnt <- ifelse(0.04<= L/(A^0.5)& L/(A^0.5)<=0.14,  L/(A^0.5)*((A^0.5)/S), NA)#ventura heras
+    tc_vnt <- ifelse(0.04<= L/(A^0.5)& L/(A^0.5)<=0.14,  L/(A^0.5)*((A^0.5)/S), NA)#ventura heras
 
-  #tl
-  tc_ner <- 2.8*(L/(S/100*1000)^0.5)^0.47 #NERC
+    #tl
+    tc_ner <- 2.8*(L/(S/100*1000)^0.5)^0.47 #NERC
 
-  tc_mim <- 0.43*A^0.418 #Mimikou’s
+    tc_mim <- 0.43*A^0.418 #Mimikou’s
 
-  tc_ner <- 0.000326*(1000*L/(S/100)^0.5)^0.79 #Watt-Chow
+    tc_ner <- 0.000326*(1000*L/(S/100)^0.5)^0.79 #Watt-Chow
 
-  tc_haz <- 0.2685*L^0.841#Haktanir-Sezen
+    tc_haz <- 0.2685*L^0.841#Haktanir-Sezen
 
-  #
-  tab_tc <- data.frame(type = 'Tc',
-                       method = c('Bransby_Williams', 'Kirpich', 'Kerby', 'Johnstone_Cross',
-                                  'California', 'Clark', 'Giandotti', 'Passini',
-                                  'Temez', 'Perez', 'Pilgrim', 'USBR',
-                                  'Valencia_Zuluaga', 'Ventura_Heras'),
-                       time = round(c(tc_brw, tc_krp, tc_krb, tc_jhc, tc_clf, tc_clk, tc_gnd,
-                                      tc_psn, tc_tmz, tc_prz, tc_plg, tc_usb, tc_val, tc_vnt),2))
+    #
+    tab_tc <- data.frame(type = 'Tc',
+                         method = c('Bransby_Williams', 'Kirpich', 'Kerby', 'Johnstone_Cross',
+                                    'California', 'Clark', 'Giandotti', 'Passini',
+                                    'Temez', 'Perez', 'Pilgrim', 'USBR',
+                                    'Valencia_Zuluaga', 'Ventura_Heras'),
+                         time = round(c(tc_brw, tc_krp, tc_krb, tc_jhc, tc_clf, tc_clk, tc_gnd,
+                                        tc_psn, tc_tmz, tc_prz, tc_plg, tc_usb, tc_val, tc_vnt),2))
 
-  tab_tl <- data.frame(type = 'Tl',
-                       method = c('NERC', 'Mimikou’s','Watt-Chow', 'Haktanir-Sezen'),
-                       time = round(c(tc_ner, tc_mim, tc_ner, tc_haz),2))
+    tab_tl <- data.frame(type = 'Tl',
+                         method = c('NERC', 'Mimikou’s','Watt-Chow', 'Haktanir-Sezen'),
+                         time = round(c(tc_ner, tc_mim, tc_ner, tc_haz),2))
 
-  tab_tm <- rbind(tab_tc, tab_tl)
-  tab_smr <- tapply(X = tab_tm$time,INDEX = tab_tm$type,FUN = median, na.rm = T)
+    tab_tm[[i]] <- cbind(data.frame(sbs = i), rbind(tab_tc, tab_tl))
+  }
+  tab_tm <- do.call(rbind, tab_tm)
+  tab_smr <- tapply(X = tab_tm$time, INDEX = list(tab_tm$sbs, tab_tm$type), FUN = median, na.rm = T)
 
-  boxplot(time ~ type, data = tab_tm, ylab= "Duration (hr)", xlab= "Type")
-  print(paste0('Tc ', round(tab_smr[1], 2), ' hr | ',
-               'Tl ', round(tab_smr[2], 2), ' hr'))
+  boxplot(time ~ type + sbs, data = tab_tm, col = c('#00abea', '#82b000'),
+          ylab= "Duration [hr]", show.names = F, xlab=NULL)
+  axis(1, labels= id, at = seq(1.5, nrow(tab_smr)*2-0.5, by = 2))
+  legend("topright", fill = c('#00abea', '#82b000'), inset = c(0,-0.15),
+         legend = c("Tc", "Tl"), xpd= TRUE, bty="n", ncol = nrow(tab_smr))
+
+  cat(paste0(id,' | Tc ', round(tab_smr[,1], 2), ' hr | ',
+             'Tl ', round(tab_smr[,2], 2), ' hr'), sep="\n")
   if(class(path) == 'character' & nchar(path) > 2){
     write.csv(tab_tm, paste0(path, 'timelag_out.csv'), row.names = F)
   }

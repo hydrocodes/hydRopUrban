@@ -3,7 +3,7 @@ Type: Package
 Title: hydRopUrban
 Version: 1.3
 Author: Pedro Rau
-Maintainer: Pedro Rau <pedro.rau.ing@gmail.com>
+Maintainer: Leonardo Gutierrez <lgutierrezlf@gmail.com>
 Description: An R package for easy calculations in urban hydrology
 License: GPL-2
 Encoding: UTF-8
