@@ -2,7 +2,6 @@ Package: hydRopUrban
 Type: Package
 Title: hydRopUrban
 Version: 1.0
-Author: Pedro Rau
 Authors@R: c(
     person("Pedro", "Rau", , "pedro.rau.ing@gmail.com", role = c("aut", "cre")),
     person("Leonardo", "Gutierrez", , "lgutierrezlf@gmail.com", role = "aut")
