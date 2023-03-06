@@ -1,14 +1,6 @@
----
-output: github_document
----
-
 # *hydRopUrban*: An R package for preliminary urban hydrological design <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" alt="logo" style="float:right;" width="200"/>
 
-<!-- badges: start -->
-
 [![Project Status: Active -- The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CRAN](http://www.r-pkg.org/badges/version/hydRopUrban)](https://CRAN.R-project.org/package=hydRopUrban) [![License](https://img.shields.io/badge/license-GPL%20(%3E=%202)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
-
-<!-- badges: end -->
 
 ## 1. What is hydRopUrban?
 
@@ -24,7 +16,7 @@ The main functions are: - `rational()`: Estimation of discharge hydrograph by th
 
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
 
-**Step 1**: In Rstudio, install `devtools` package from CRAN
+**Step 1**: In Rstudio, install `devtools` package from CRAN.
 
 **Step 2**: In Rstudio console or on your script, please write
 
