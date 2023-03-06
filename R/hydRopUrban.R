@@ -419,23 +419,24 @@ idf <- function(precipitation = 48, type = '1', path = NA){
 
 #' @title lagtime
 #' @description Estimation of time concentration and lag time
-#' @param longitud A numeric value: Input design longitud in km
+#' @param longitude A numeric value: Input design longitude in km
 #' @param area A numeric value: Input design area in km2
 #' @param slope A numeric value: Input design slope in percentage
 #' @param altitudiff A numeric value: Input design altitudiff in m
 #' @param path An option: path
-#' @return table time concentration and lagtime
-#' @examples lagtime(longitud, area, slope, altitudiff, path)
+#' @param load_plot An option: Generate box plots and view result
+#' @return table time concentration and lag-time
+#' @examples lagtime(longitude, area, slope, altitudiff, path)
 #' @export
 
-lagtime <- function(longitud = lon, area =area, slope = spc,
-                    altitudiff = alt, id = NA, path =NA){
+lagtime <- function(longitude = lon, area =area, slope = spc,
+                    altitudiff = alt, id = NA, path =NA, load_plot = F){
   if(class(id) != 'character'){
-    id <- 1:length(longitud)
+    id <- 1:length(longitude)
   }
   tab_tm <- list()
-  for (i in 1:length(longitud)) {
-    L <- longitud[i]
+  for (i in 1:length(longitude)) {
+    L <- longitude[i]
     A <- area[i]
     S <- slope[i]
     H <- altitudiff[i]
@@ -485,25 +486,27 @@ lagtime <- function(longitud = lon, area =area, slope = spc,
                                     'Temez', 'Perez', 'Pilgrim', 'USBR',
                                     'Valencia_Zuluaga', 'Ventura_Heras'),
                          time = round(c(tc_brw, tc_krp, tc_krb, tc_jhc, tc_clf, tc_clk, tc_gnd,
-                                        tc_psn, tc_tmz, tc_prz, tc_plg, tc_usb, tc_val, tc_vnt),2))
+                                        tc_psn, tc_tmz, tc_prz, tc_plg, tc_usb, tc_val, tc_vnt),6))
 
     tab_tl <- data.frame(type = 'Tl',
-                         method = c('NERC', 'Mimikou’s','Watt-Chow', 'Haktanir-Sezen'),
-                         time = round(c(tc_ner, tc_mim, tc_ner, tc_haz),2))
+                         method = c('NERC', 'Mimikous','Watt-Chow', 'Haktanir-Sezen'),
+                         time = round(c(tc_ner, tc_mim, tc_ner, tc_haz),6))
 
-    tab_tm[[i]] <- cbind(data.frame(sbs = i), rbind(tab_tc, tab_tl))
+    tab_tm[[i]] <- cbind(data.frame(sbs = id[i]), rbind(tab_tc, tab_tl))
   }
   tab_tm <- do.call(rbind, tab_tm)
   tab_smr <- tapply(X = tab_tm$time, INDEX = list(tab_tm$sbs, tab_tm$type), FUN = median, na.rm = T)
 
-  boxplot(time ~ type + sbs, data = tab_tm, col = c('#00abea', '#82b000'),
-          ylab= "Duration [hr]", show.names = F, xlab=NULL)
-  axis(1, labels= id, at = seq(1.5, nrow(tab_smr)*2-0.5, by = 2))
-  legend("topright", fill = c('#00abea', '#82b000'), inset = c(0,-0.15),
-         legend = c("Tc", "Tl"), xpd= TRUE, bty="n", ncol = nrow(tab_smr))
+  if(load_plot == T){
+    boxplot(time ~ type + sbs, data = tab_tm, col = c('#00abea', '#82b000'),
+            ylab= "Duration [hr]", show.names = F, xlab=NULL)
+    axis(1, labels= id, at = seq(1.5, nrow(tab_smr)*2-0.5, by = 2))
+    legend("topright", fill = c('#00abea', '#82b000'), inset = c(0,-0.15),
+           legend = c("Tc", "Tl"), xpd= TRUE, bty="n", ncol = nrow(tab_smr))
 
-  cat(paste0(id,' | Tc ', round(tab_smr[,1], 2), ' hr | ',
-             'Tl ', round(tab_smr[,2], 2), ' hr'), sep="\n")
+    cat(paste0(id,' | Tc ', round(tab_smr[,1], 6), ' hr | ',
+               'Tl ', round(tab_smr[,2], 6), ' hr'), sep="\n")
+  }
   if(class(path) == 'character' & nchar(path) > 2){
     write.csv(tab_tm, paste0(path, 'timelag_out.csv'), row.names = F)
   }

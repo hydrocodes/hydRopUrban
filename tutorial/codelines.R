@@ -46,4 +46,5 @@ idf_df <- idf(precipitation =20, type="3", path = 'C:/')
 #lagtime
 sbs <- read.csv('tutorial/database_sbs.csv')
 
-ltm_df <- lagtime(area = sbs$area, longitud = sbs$lon, slope = sbs$spc, altitudiff = sbs$dfa)
+ltm_df <- lagtime(area = sbs$area, longitud = sbs$lon, slope = sbs$spc, altitudiff = sbs$dfa,
+                  id = sbs$ID, load_plot = TRUE)
