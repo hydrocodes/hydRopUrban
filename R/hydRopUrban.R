@@ -422,7 +422,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
 #' @param longitude A numeric value: Input design longitude in km
 #' @param area A numeric value: Input design area in km2
 #' @param slope A numeric value: Input design slope in percentage
-#' @param altitudiff A numeric value: Input design altitudiff in m
+#' @param altitudiff A numeric value: Input design attitudinal difference in m
 #' @param path An option: path
 #' @param load_plot An option: Generate box plots and view result
 #' @return table time concentration and lag-time

@@ -1,6 +1,6 @@
-# *hydRopUrban*: An R package for preliminary urban hydrological design <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban.PNG" alt="logo" style="float:right;" width="200"/>
+# *hydRopUrban*: An R package for preliminary urban hydrological design <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban_hex.PNG" alt="logo" style="float:right;" width="200"/>
 
-[![Project Status: Active -- The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![CRAN](http://www.r-pkg.org/badges/version/hydRopUrban)](https://CRAN.R-project.org/package=hydRopUrban) [![License](https://img.shields.io/badge/license-GPL%20(%3E=%202)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![Project Status: Active -- The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  [![License](https://img.shields.io/badge/license-GPL%20(%3E=%202)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 
 ## 1. What is hydRopUrban?
 
