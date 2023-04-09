@@ -10,7 +10,13 @@
 
 Six main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
-The main functions are: - `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889), by the modified rational method considering a storm event duration (Poertner, 1974; Smith and Lee, 1984), and by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996). - `caquot()`: Maximal discharge by Caquot's method for serial and parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941). - `routing()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991), and the Convex method (USDA-SCS, 1965). - `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003), and by wash-off from pervious surfaces (Huber and Dickinson, 1988). - `idf()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986). - `lagtime()`: Estimation of lag times and time of concentration by 18 empirical methods (Gericke et al, 2014).
+The main functions are: 
+- `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889), by the modified rational method considering a storm event duration (Poertner, 1974; Smith and Lee, 1984), and by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996).
+- `caquot()`: Maximal discharge by Caquot's method for serial and parallel drainage units and equivalent values for unit drainage resulting (Caquot, 1941).
+- `routing()`: Outflow discharge through a channel routing by the method of Muskingum-Cunge (USACE, 1991), and the Convex method (USDA-SCS, 1965).
+- `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003), and by wash-off from pervious surfaces (Huber and Dickinson, 1988).
+- `idf()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
+- `lagtime()`: Estimation of lag times and time of concentration by 18 empirical methods (Gericke et al, 2014).
 
 ## 3. How to install hydRopUrban?
 
