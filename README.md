@@ -62,7 +62,7 @@ v 0.1 - August 11, 2021
 
 ## 6. How to cite?
 
-Rau, P., Gutierrez, L., Callan, N. A tool in R for preliminary urban hydrological design. (submitted)
+Rau, P., Gutierrez, L., Callan, N. 2023. A tool in R for preliminary urban hydrological design. Advances in Science, Technology and Innovation (accepted)
 
 ## 7. References
 
