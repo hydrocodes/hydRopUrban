@@ -443,13 +443,13 @@ lagtime <- function(longitude = lon, area =area, slope = spc,
     #tc
     tc_brw <- 0.2426*(L/((A^0.1)*(S/100)^0.2)) #Bransby_Williams
 
-    tc_krp <- 0.4*0.0663*((L^2)/(S/100))^0.385#kirpich
+    tc_krp <- 0.4*0.0663*((L^2)/(S/100))^0.385 #Kirpich
 
-    tc_krb <- ifelse(L<=0.1 & A<=0.04 & S <= 1, 1.4394/60*((L*1000)*n/(S/100)^0.5)^0.467, NA)#kerby
+    tc_krb <- ifelse(L<=0.1 & A<=0.04 & S <= 1, 1.4394/60*((L*1000)*n/(S/100)^0.5)^0.467, NA) #Kerby
 
     tc_jhc <- ifelse(A >= 65, 0.0543*(L/(S/100))^0.5, NA) #Johnstone_Cross
 
-    tc_clf <- (60*((0.87075*(L)^3)/H)^0.385)/60 #california
+    tc_clf <- (60*((0.87075*(L)^3)/H)^0.385)/60 #California
 
     tc_clk <- 0.335* (A/(S/100)^0.5)^0.593 #Clark
 
@@ -460,24 +460,24 @@ lagtime <- function(longitude = lon, area =area, slope = spc,
 
     tc_tmz <- 0.3*(L/((S/100)^0.25))^0.76 #Temez
 
-    tc_prz <- L/(72*((H/L)^0.6))#perez
+    tc_prz <- L/(72*((H/L)^0.6)) #Perez
 
-    tc_plg <- 0.76*((A)^0.38)#pilgrim
+    tc_plg <- 0.76*((A)^0.38) #Pilgrim
 
-    tc_usb <- ifelse(A >= 1, 2-0.5*log10(A), 2)*((0.87*L^2)/(1000*(S/100)))^0.385#USBR
+    tc_usb <- ifelse(A >= 1, 2-0.5*log10(A), 2)*((0.87*L^2)/(1000*(S/100)))^0.385 #USBR
 
-    tc_val <- 1.7694*((A)^0.325)*((L)^-0.096)*((S)^-0.290)#valencia zuluaga
+    tc_val <- 1.7694*((A)^0.325)*((L)^-0.096)*((S)^-0.290) #Valencia Zuluaga
 
-    tc_vnt <- ifelse(0.04<= L/(A^0.5)& L/(A^0.5)<=0.14,  L/(A^0.5)*((A^0.5)/S), NA)#ventura heras
+    tc_vnt <- ifelse(0.04<= L/(A^0.5)& L/(A^0.5)<=0.14,  L/(A^0.5)*((A^0.5)/S), NA) #Ventura Heras
 
     #tl
     tc_ner <- 2.8*(L/(S/100*1000)^0.5)^0.47 #NERC
 
-    tc_mim <- 0.43*A^0.418 #Mimikou’s
+    tc_mim <- 0.43*A^0.418 #Mimikou
 
     tc_ner <- 0.000326*(1000*L/(S/100)^0.5)^0.79 #Watt-Chow
 
-    tc_haz <- 0.2685*L^0.841#Haktanir-Sezen
+    tc_haz <- 0.2685*L^0.841 #Haktanir-Sezen
 
     #
     tab_tc <- data.frame(type = 'Tc',
