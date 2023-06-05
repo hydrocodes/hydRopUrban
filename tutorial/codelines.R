@@ -27,7 +27,7 @@ qr_mc <- routing(flow.in = inflow, flow.ref = 1.5, velocity = 2.1, slope = 0.01,
                  channel = 20, longitud =  2500, flow.area = 1.31, flow.init = 0,
                  delta.time = 0.05, method = 'mcunge', path = 'C:/')
 
-qr_cv <- routing(flow.in = inflow, flow.init = 0, channel = 20, longitud = 2500,
+qr_cv <- routing(flow.in = inflow, flow.init = 0, width = 20, longitud = 2500,
                  slope = 0.0005, cmanning = 0.05, delta.time = 0.1, method = 'convex', path = 'C:/')
 
 #pollutant
