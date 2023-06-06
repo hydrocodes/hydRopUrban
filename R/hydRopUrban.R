@@ -234,11 +234,11 @@ pollutant <- function(flow.in = inflow, intensity = c(7.62,12.7,33.02,10.16,7.62
                       solids = 2131.88, kc = 0.1811, kt = 0.27,
                       delta.time = 0.05, longitud=122, slope = 0.001, coefficient=0.003, param = 1,
                       method = 'impervious', path = NA){
-  qi <- flow.in
   dt <- delta.time
   lg <- longitud
   ip <- intensity
   if(method == 'impervious'){
+    qi <- flow.in
     x <- seq(0,dt*(length(qi)-1),dt)
     r1 <- qi*1000*3600/(area*1000000)
     ra <- c()
