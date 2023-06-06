@@ -355,8 +355,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
       int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
       int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
     }
-  }
-  else if(type=="1a") {
+  }  else if(type=="1a") {
     pacm <- precipitation*scs1a
     p <- c()
     int2 <- c()
@@ -368,8 +367,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
       int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
       int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
     }
-  }
-  else if(type=="2"){
+  }  else if(type=="2"){
     pacm <- precipitation*scs2
     p <- c()
     int2 <- c()
@@ -381,8 +379,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
       int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
       int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
     }
-  }
-  else if(type=="3"){
+  }  else if(type=="3"){
     pacm <- precipitation*scs3
     p <- c()
     int2 <- c()
@@ -394,9 +391,7 @@ idf <- function(precipitation = 48, type = '1', path = NA){
       int3[i] <- (p[i+3]+p[i+2]+p[i+1])/3
       int4[i] <- (p[i+4]+p[i+3]+p[i+2]+p[i+1])/4
     }
-  }
-  else
-    stop(sQuote(x), " not implemented")
+  }  else stop(sQuote(x), " not implemented")
   ps <- max(p[!is.na(p)])
   int2s <- suppressWarnings(max(int2[!is.na(int2)]))
   int3s <- suppressWarnings(max(int3[!is.na(int3)]))
@@ -410,10 +405,12 @@ idf <- function(precipitation = 48, type = '1', path = NA){
   x <- c(1:24)
   y <- a*x^b
   plot(x,y,type="l", lwd=2, xlab="Duration [hr]", ylab="Intensity [mm/hr]")
-  sprintf("Intensity = a*Duration^b: a = %f, b = %f", a, b)
+  print(sprintf("Intensity = a*Duration^b: a = %f, b = %f", a, b))
+  file_out <- data.frame(Duration = x, Intensity = y)
+  return(file_out)
 
   if(class(path) == 'character' & nchar(path) > 2){
-    write.csv(data.frame(Duration = x, Intensity = y), paste0(path, 'idf_',type,'_out.csv'), row.names = F)
+    write.csv(file_out, paste0(path, 'idf_',type,'_out.csv'), row.names = F)
   }
 }
 
