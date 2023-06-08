@@ -74,11 +74,11 @@ rational <- function(crunoff = 0.95, intensity = 2.9, area = 0.57, time.con = 0.
   names(hy_df)[3:(2+length(Qp))] <- paste0('Discharge_s', 1:length(Qp))
   print(paste0("Qpeak = ", round(max(hy_df[,2]),2),
                " m3/s, Volume = ",round(sum(hy_df[,2])*dt*60*60,2)," m3"))
-  plot(x = hy_df$Hours, y = hy_df$Discharge, type = 'l', lwd = 2,
+  plot(x = hy_df$Hours, y = hy_df$Discharge, type = 'l', lwd = 2, format = "%H:%M",
        ylab = 'Discharge [m3/s]', xlab = 'Time [hr]')
   coll <- rainbow(length(Qp))
   for (i in 1:length(Qp)){lines(x = hy_df$Hours,y = hy_df[,2+i],col = coll[i],type = 'l') }
-  hy_df$Hours <- format(hy_df$Hours, format = "%d %H:%M:%S")
+  hy_df$Hours <- format(hy_df$Hours, format = "%H:%M:%S")
   hy_df[,-1] <- round(hy_df[,-1], 3)
   if(class(path) == 'character' & nchar(path) > 2){
     write.csv(hy_df, paste0(path, 'hydro_',method,'_out.csv'), row.names = F)
