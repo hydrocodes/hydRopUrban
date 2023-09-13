@@ -46,7 +46,7 @@ Please, check tutorial folder for codelines examples and more details: <https://
 
 ## 4. Credits
 
-`hydRopUrban` was developed by Pedro Rau and Leonardo Gutierrez at Water Research and Technology Center of Universidad de Ingenieria y Tecnologia (UTEC-CITA, Lima) . For any issue or suggestion please write to: [pedro.rau.ing\@gmail.com](mailto:pedro.rau.ing@gmail.com){.email}
+`hydRopUrban` was developed by Pedro Rau and Leonardo Gutierrez at Water Research and Technology Center of Universidad de Ingenieria y Tecnologia (UTEC-CITA, Lima). Authors acknowledge support from the fund KF400238 British Academy: “Furia de los Rios” project. For any issue or suggestion please write to: [pedro.rau.ing\@gmail.com](mailto:pedro.rau.ing@gmail.com)
 
 ## 5. Versions
 
