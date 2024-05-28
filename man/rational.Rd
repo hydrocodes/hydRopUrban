@@ -14,7 +14,7 @@ area: A dataframe containing drainage units parameters: area in km2 (A)
 time.con: A dataframe containing drainage units parameters: time of concentration in hr (Tc)
 duration: A numeric value: Event duration in hr
 delta.time: A numeric value: Time interval in hours (e.g. 3-min as 0.05)
-method: A character: select method
+method: A character: select method "standard", "modified", "universal"
 path: An option: path
 }
 \examples{
