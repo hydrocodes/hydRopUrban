@@ -14,7 +14,7 @@ area: A vector containing drainage units parameters: area in Ha (A)
 longitud: A vector containing drainage units parameters: travel length in m (L)
 a: A numeric value: Exponent from Montana IDF equation a*D^b
 b: A numeric value: Exponent from Montana IDF equation a*D^b
-method: A character: select method
+method: A character: select method "parallel", "serial"
 path: An option: path
 }
 \examples{
