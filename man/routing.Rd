@@ -5,7 +5,7 @@
 routing(inflow, Qo, B, L, S, n, dt)
 }
 \description{
-Estimation of routed hydrograph and peak flows by the Convex and method.
+Estimation of routed hydrograph and peak flows by the Convex and MCunge method.
 }
 \arguments{
 flow.in: A vector: Input hydrograph in m3/s
@@ -18,7 +18,7 @@ slope: A numeric value: channel slope in m/m
 flow.area: A numeric value: Q-A relationship exponent of the hydraulic section Q=e*A^m
 cmanning: A numeric value: Manning's roughness coefficient
 delta.time: A numeric value: Time interval in hours
-method: A character: select method
+method: A character: select method "convex", "mcunge"
 path: An option: path
 }
 \examples{
