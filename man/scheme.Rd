@@ -20,5 +20,5 @@ z2 A numeric value of cut slope of channel or ditch section 1V:(z2)H
 D A numeric value of circular section or pipe diameter in m
 }
 \examples{
-scheme(area=0.1, crunoff=0.7, intensity=10, type="rt", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5)
+scheme(area=0.1, crunoff=0.7, intensity=10, type="rtg", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5)
 }
