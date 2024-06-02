@@ -1,4 +1,4 @@
-# *hydRopUrban*: An R package for preliminary urban hydrological design <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban_hex.PNG" alt="logo" style="float:right;" width="200"/>
+# *hydRopUrban*: An R package for preliminary urban hydrological design <p> <img src="https://github.com/hydrocodes/hydRopUrban/blob/main/tutorial/hydropurban_hex.PNG" alt="logo" style="float:right;" width="200"/>
 
 [![Project Status: Active -- The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)  [![License](https://img.shields.io/badge/license-GPL%20(%3E=%202)-lightgrey.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -17,7 +17,7 @@ The main functions are:
 - `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003), and by wash-off from pervious surfaces (Huber and Dickinson, 1988).
 - `idf()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
 - `lagtime()`: Estimation of lag times and time of concentration by 18 empirical methods (Gericke et al, 2014).
-- 'scheme()': Basin drainage scheme by the rational method and uniform flow in open channels
+- `scheme()`: Basin drainage scheme by the rational method and uniform flow in open channels
 
 ## 3. How to install hydRopUrban?
 
