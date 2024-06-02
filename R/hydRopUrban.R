@@ -523,7 +523,7 @@ lagtime <- function(longitude = lon, area =area, slope = spc,
 #' @param z2 A numeric value of cut slope of channel or ditch section 1V:(z2)H
 #' @param D A numeric value of circular section or pipe diameter in m
 #' @return Scheme plot, Froude number and mean velocity at drainage ditch or pipe section
-#' @examples scheme(crunoff, intensity, area, type="rt", S, n, B, z1, z2, D)
+#' @examples scheme(crunoff, intensity, area, type="rtg", S, n, B, z1, z2, D)
 #' @export
 
 scheme <- function(area, crunoff, intensity, type="rt", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5){
