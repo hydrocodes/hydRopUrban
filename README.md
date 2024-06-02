@@ -8,7 +8,7 @@
 
 ## 2. What is hydRopUrban for?
 
-Six main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
+Seven main functions are implemented in `hydRopUrban`. Their applications cover the topics of empirical and deterministic urban hydrology based on wide-used theory.
 
 The main functions are: 
 - `rational()`: Estimation of discharge hydrograph by the standard rational method with a triangular hydrograph with a recession of 1xTc, where Tc is the time of concentration (Mulvany, 1851; Kuichling, 1889), by the modified rational method considering a storm event duration (Poertner, 1974; Smith and Lee, 1984), and by the universal rational method with a synthetic hydrograph for urban catchments (ASCE, 1996).
@@ -17,17 +17,18 @@ The main functions are:
 - `pollutant()`: Estimation of pollutegraphs, discharge and concentration by wash-off from impervious surfaces (Akan and Houghtalen, 2003), and by wash-off from pervious surfaces (Huber and Dickinson, 1988).
 - `idf()`: Estimation of Intensity-Duration-Frequency adjustment from SCS storms (USDA, 1986).
 - `lagtime()`: Estimation of lag times and time of concentration by 18 empirical methods (Gericke et al, 2014).
+- 'scheme()': Basin drainage scheme by the rational method and uniform flow in open channels
 
 ## 3. How to install hydRopUrban?
 
 The `hydRopUrban` package must be installed from Github hydrocodes repository, following the next 2 steps.
 
-**Step 1**: In Rstudio, install `devtools` package from CRAN.
+**Step 1**: In Rstudio, install `remotes` package from CRAN.
 
 **Step 2**: In Rstudio console or on your script, please write
 
 ``` r
-devtools::install_github("hydrocodes/hydRopUrban")
+remotes::install_github("hydrocodes/hydRopUrban")
 ```
 
 During the installation, please check in R console and skip other updates with an empty line or selecting option "None".
@@ -49,6 +50,8 @@ Please, check tutorial folder for codelines examples and more details: <https://
 `hydRopUrban` was developed by Pedro Rau and Leonardo Gutierrez at Water Research and Technology Center of Universidad de Ingenieria y Tecnologia (UTEC-CITA, Lima). Authors acknowledge support from the fund KF400238 British Academy: “Furia de los Rios” project. For any issue or suggestion please write to: [pedro.rau.ing\@gmail.com](mailto:pedro.rau.ing@gmail.com)
 
 ## 5. Versions
+
+v 1.1 - June 01, 2024
 
 v 1.0 - November 18, 2022
 
