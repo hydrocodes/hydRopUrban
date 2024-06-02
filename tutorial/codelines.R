@@ -48,3 +48,6 @@ sbs <- read.csv('tutorial/database_sbs.csv')
 
 ltm_df <- lagtime(area = sbs$area, longitud = sbs$lon, slope = sbs$spc, altitudiff = sbs$dfa,
                   id = sbs$ID, load_plot = TRUE)
+
+#scheme
+scheme(area=0.1, crunoff=0.7, intensity=10, type="rtg", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5)
