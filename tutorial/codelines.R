@@ -50,4 +50,7 @@ ltm_df <- lagtime(area = sbs$area, longitud = sbs$lon, slope = sbs$spc, altitudi
                   id = sbs$ID, load_plot = TRUE)
 
 #scheme
-scheme(area=0.1, crunoff=0.7, intensity=10, type="rtg", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5)
+scheme(area=0.1, crunoff=0.7, intensity=10, type="rtg", S=0.01, n=0.012, B=0.5)
+scheme(area=0.1, crunoff=0.7, intensity=10, type="tpz", S=0.01, n=0.012, B=0.5, z1=1, z2=1)
+scheme(area=0.1, crunoff=0.7, intensity=10, type="trg", S=0.01, n=0.012,z1=1, z2=1)
+scheme(area=0.1, crunoff=0.7, intensity=10, type="crc", S=0.01, n=0.012, D=0.5)
