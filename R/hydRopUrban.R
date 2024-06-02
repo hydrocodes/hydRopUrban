@@ -509,3 +509,92 @@ lagtime <- function(longitude = lon, area =area, slope = spc,
   }
   return(tab_tm)
 }
+
+#' @title scheme
+#' @description Basin drainage scheme by rational method and uniform flow in open channels
+#' @param crunoff A numeric value of Runoff coefficient
+#' @param intensity A numeric value of intensity in mm/hr
+#' @param area A numeric value of area in km2
+#' @param type A character: select method
+#' @param S A numeric value of channel or ditch slope in m/m
+#' @param n A numeric value of Manning rugosity of channel or ditch
+#' @param B A numeric value of channel or ditch width in m
+#' @param z1 A numeric value of cut slope of channel or ditch section 1V:(z1)H
+#' @param z2 A numeric value of cut slope of channel or ditch section 1V:(z2)H
+#' @param D A numeric value of circular section or pipe diameter in m
+#' @return Scheme plot, Froude number and mean velocity at drainage ditch or pipe section
+#' @examples scheme(crunoff, intensity, area, type="rt", S, n, B, z1, z2, D)
+#' @export
+
+scheme <- function(area, crunoff, intensity, type="rt", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5){
+  Qmax <- crunoff*intensity*area/3.6 
+  plot(NA, xlim=c(-0.5,4.5), ylim=c(-1.5,4.5), bty="n", axes=F, xlab="", ylab="", main="Basin drainage scheme")
+  lines(c(0.5,1.5), c(1.5,0.5), col="grey", lwd=6) 
+  lines(c(1.5,3.5), c(0.5,2), col="grey", lwd=6) 
+  lines(c(3.5,2), c(2,3), col="grey", lwd=6) 
+  lines(c(0.5,2), c(1.5,3), col="grey", lwd=6) 
+  lines(c(1,2), c(1,2), col="blue", lwd=6, lty=3) 
+  points(1,1,pch=16, cex=2)
+  arrows(2, 4.5, 2, 3.5) 
+  arrows(1, 0.9, 1, 0) 
+  lines(c(1,1), c(-0.1,-0.5), col="blue", lwd=1, lty=2) 
+  text(3,4,paste0("intensity\n", round(intensity, 1), "\t mm/hr"))
+  text(0.2,0.8,paste0("Q peak\n", round(Qmax, 3), "\t m³/s"), col="blue")
+  
+if(type=="rtg"){
+  z1=0; z2=0; 
+  f <- function(y) {abs((1/n)*(S^0.5)*((B+(z1+z2)*y/2)*y)^(5/3)/(B+y*(1+z1^2)^0.5+y*(1+z2^2)^0.5)^(2/3) - Qmax)}
+  res <- optimize(interval=c(0,5*B),f)
+  H <- res$minimum
+  # RECTANGLE DITCH
+  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3) 
+  lines(c(0.7,0.7), c(-0.5,-1), col="darkgreen", lwd=5) 
+  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5) 
+  lines(c(1.3,1.3), c(-1,-0.5), col="darkgreen", lwd=5) 
+  text(1,-1.2,paste0("B = ", round(B, 1), "\t m"))
+  text(1.9,-0.75,paste0("H = ", round(H, 2), "\t m"),col="blue")
+  return(paste0("Fr=",round(Qmax/(B*H)/sqrt(9.81*H),2), "  Vel=",round(Qmax/(B*H),2), " m/s"))
+  }
+if(type=="tpz"){
+  f <- function(y) {abs((1/n)*(S^0.5)*((B+(z1+z2)*y/2)*y)^(5/3)/(B+y*(1+z1^2)^0.5+y*(1+z2^2)^0.5)^(2/3) - Qmax)}
+  res <- optimize(interval=c(0,5*B),f)
+  H <- res$minimum
+  # TRAPEZOIDAL DITCH
+  lines(c(0.55,1.45), c(-0.75,-0.75), col="blue", lwd=3) 
+  lines(c(0.7,0.4), c(-1,-0.5), col="darkgreen", lwd=5) 
+  lines(c(1.3,1.6), c(-1,-0.5), col="darkgreen", lwd=5) 
+  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5) 
+  text(1,-1.2,paste0("B = ", round(B, 1), "\t m"))
+  text(1,-1.5,paste0("z1 = ", round(z1, 1), "  z2 = ", round(z2, 1)))
+  text(2.1,-0.75,paste0("H = ", round(H, 2), "\t m"),col="blue")
+  return(paste0("Fr=",round(Qmax/((B+B+z1*H+z2*H)*H/2)/sqrt(9.81*H),2), "  Vel=",round(Qmax/((B+B+z1*H+z2*H)*H/2),2), " m/s"))
+}
+if(type=="trg"){  
+  B=0 
+  f <- function(y) {abs((1/n)*(S^0.5)*((B+(z1+z2)*y/2)*y)^(5/3)/(B+y*(1+z1^2)^0.5+y*(1+z2^2)^0.5)^(2/3) - Qmax)}
+  res <- optimize(interval=c(0,10),f)
+  H <- res$minimum
+  # TRIANGLE DITCH
+  lines(c(0.85,1.15), c(-0.75,-0.75), col="blue", lwd=3) 
+  lines(c(1,0.7), c(-1,-0.5), col="darkgreen", lwd=5) 
+  lines(c(1,1.3), c(-1,-0.5), col="darkgreen", lwd=5) 
+  text(1.8,-0.75,paste0("H = ", round(H, 2), "\t m"), col="blue")
+  text(1,-1.2,paste0("z1 = ", round(z1, 1), "  z2 = ", round(z2, 1)))
+  return(paste0("Fr=",round(Qmax/(H*(H*z1+H*z2)/2)/sqrt(9.81*H),2), "  Vel=",round(Qmax/(H*(H*z1+H*z2)/2),2), " m/s"))
+}
+if(type=="crc"){    
+  f <- function(a) {abs( (1/n)*(S^0.5)*(D/4)*(pi*a/360 - sin(a*pi/180)/2)*((D/4)*(1 - 360*sin(a*pi/180)/(2*pi*a)))^(2/3)  - Qmax)}
+  res <- optimize(interval=c(0,180),f)
+  H <- D*(2-cos(res$minimum*pi/180))/4
+  # PIPEhttp://127.0.0.1:43059/graphics/plot_zoom_png?width=500&height=588
+  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3) 
+  radius = 0.3
+  center_x = 1
+  center_y = -0.75
+  theta = seq(0, 2 * pi, length = 200) # angles for drawing points around the circle
+  lines(x = radius * cos(theta) + center_x, y = radius * sin(theta) + center_y, lwd=3, col="darkgreen")
+  text(2,-0.75,paste0("H = ", round(H, 2), "\t m"),col="blue")
+  text(1,-1.2,paste0("D = ", round(D, 1), "\t m"))
+  return(paste0("Fr=",round(Qmax/(D^2*(res$minimum*pi/180 - sin(res$minimum*pi/180)))/sqrt(9.81*H),2), "  Vel=",round(Qmax/(D^2*(res$minimum*pi/180 - sin(res$minimum*pi/180))),2), " m/s"))
+  }
+}
