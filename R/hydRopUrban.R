@@ -74,7 +74,7 @@ rational <- function(crunoff = 0.95, intensity = 2.9, area = 0.57, time.con = 0.
   names(hy_df)[3:(2+length(Qp))] <- paste0('Discharge_s', 1:length(Qp))
   print(paste0("Qpeak = ", round(max(hy_df[,2]),2),
                " m3/s, Volume = ",round(sum(hy_df[,2])*dt*60*60,2)," m3"))
-  plot(x = hy_df$Hours, y = hy_df$Discharge, type = 'l', lwd = 2, format = "%H:%M",
+  plot(x = hy_df$Hours, y = hy_df$Discharge, type = 'l', lwd = 2,
        ylab = 'Discharge [m3/s]', xlab = 'Time [hr]')
   coll <- rainbow(length(Qp))
   for (i in 1:length(Qp)){lines(x = hy_df$Hours,y = hy_df[,2+i],col = coll[i],type = 'l') }
@@ -407,11 +407,11 @@ idf <- function(precipitation = 48, type = '1', path = NA){
   plot(x,y,type="l", lwd=2, xlab="Duration [hr]", ylab="Intensity [mm/hr]")
   print(sprintf("Intensity = a*Duration^b: a = %f, b = %f", a, b))
   file_out <- data.frame(Duration = x, Intensity = y)
-  return(file_out)
 
   if(class(path) == 'character' & nchar(path) > 2){
     write.csv(file_out, paste0(path, 'idf_',type,'_out.csv'), row.names = F)
   }
+  return(file_out)
 }
 
 #' @title lagtime
@@ -527,30 +527,30 @@ lagtime <- function(longitude = lon, area =area, slope = spc,
 #' @export
 
 scheme <- function(area, crunoff, intensity, type="rt", S=0.01, n=0.012, B=0.5, z1=1, z2=1, D=0.5){
-  Qmax <- crunoff*intensity*area/3.6 
+  Qmax <- crunoff*intensity*area/3.6
   plot(NA, xlim=c(-0.5,4.5), ylim=c(-1.5,4.5), bty="n", axes=F, xlab="", ylab="", main="Basin drainage scheme")
-  lines(c(0.5,1.5), c(1.5,0.5), col="grey", lwd=6) 
-  lines(c(1.5,3.5), c(0.5,2), col="grey", lwd=6) 
-  lines(c(3.5,2), c(2,3), col="grey", lwd=6) 
-  lines(c(0.5,2), c(1.5,3), col="grey", lwd=6) 
-  lines(c(1,2), c(1,2), col="blue", lwd=6, lty=3) 
+  lines(c(0.5,1.5), c(1.5,0.5), col="grey", lwd=6)
+  lines(c(1.5,3.5), c(0.5,2), col="grey", lwd=6)
+  lines(c(3.5,2), c(2,3), col="grey", lwd=6)
+  lines(c(0.5,2), c(1.5,3), col="grey", lwd=6)
+  lines(c(1,2), c(1,2), col="blue", lwd=6, lty=3)
   points(1,1,pch=16, cex=2)
-  arrows(2, 4.5, 2, 3.5) 
-  arrows(1, 0.9, 1, 0) 
-  lines(c(1,1), c(-0.1,-0.5), col="blue", lwd=1, lty=2) 
+  arrows(2, 4.5, 2, 3.5)
+  arrows(1, 0.9, 1, 0)
+  lines(c(1,1), c(-0.1,-0.5), col="blue", lwd=1, lty=2)
   text(3,4,paste0("intensity\n", round(intensity, 1), "\t mm/hr"))
   text(0.2,0.8,paste0("Q peak\n", round(Qmax, 3), "\t m³/s"), col="blue")
-  
+
 if(type=="rtg"){
-  z1=0; z2=0; 
+  z1=0; z2=0;
   f <- function(y) {abs((1/n)*(S^0.5)*((B+(z1+z2)*y/2)*y)^(5/3)/(B+y*(1+z1^2)^0.5+y*(1+z2^2)^0.5)^(2/3) - Qmax)}
   res <- optimize(interval=c(0,5*B),f)
   H <- res$minimum
   # RECTANGLE DITCH
-  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3) 
-  lines(c(0.7,0.7), c(-0.5,-1), col="darkgreen", lwd=5) 
-  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5) 
-  lines(c(1.3,1.3), c(-1,-0.5), col="darkgreen", lwd=5) 
+  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3)
+  lines(c(0.7,0.7), c(-0.5,-1), col="darkgreen", lwd=5)
+  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5)
+  lines(c(1.3,1.3), c(-1,-0.5), col="darkgreen", lwd=5)
   text(1,-1.2,paste0("B = ", round(B, 1), "\t m"))
   text(1.9,-0.75,paste0("H = ", round(H, 2), "\t m"),col="blue")
   return(paste0("Fr=",round(Qmax/(B*H)/sqrt(9.81*H),2), "  Vel=",round(Qmax/(B*H),2), " m/s"))
@@ -560,34 +560,34 @@ if(type=="tpz"){
   res <- optimize(interval=c(0,5*B),f)
   H <- res$minimum
   # TRAPEZOIDAL DITCH
-  lines(c(0.55,1.45), c(-0.75,-0.75), col="blue", lwd=3) 
-  lines(c(0.7,0.4), c(-1,-0.5), col="darkgreen", lwd=5) 
-  lines(c(1.3,1.6), c(-1,-0.5), col="darkgreen", lwd=5) 
-  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5) 
+  lines(c(0.55,1.45), c(-0.75,-0.75), col="blue", lwd=3)
+  lines(c(0.7,0.4), c(-1,-0.5), col="darkgreen", lwd=5)
+  lines(c(1.3,1.6), c(-1,-0.5), col="darkgreen", lwd=5)
+  lines(c(0.7,1.3), c(-1,-1), col="darkgreen", lwd=5)
   text(1,-1.2,paste0("B = ", round(B, 1), "\t m"))
   text(1,-1.5,paste0("z1 = ", round(z1, 1), "  z2 = ", round(z2, 1)))
   text(2.1,-0.75,paste0("H = ", round(H, 2), "\t m"),col="blue")
   return(paste0("Fr=",round(Qmax/((B+B+z1*H+z2*H)*H/2)/sqrt(9.81*H),2), "  Vel=",round(Qmax/((B+B+z1*H+z2*H)*H/2),2), " m/s"))
 }
-if(type=="trg"){  
-  B=0 
+if(type=="trg"){
+  B=0
   f <- function(y) {abs((1/n)*(S^0.5)*((B+(z1+z2)*y/2)*y)^(5/3)/(B+y*(1+z1^2)^0.5+y*(1+z2^2)^0.5)^(2/3) - Qmax)}
   res <- optimize(interval=c(0,10),f)
   H <- res$minimum
   # TRIANGLE DITCH
-  lines(c(0.85,1.15), c(-0.75,-0.75), col="blue", lwd=3) 
-  lines(c(1,0.7), c(-1,-0.5), col="darkgreen", lwd=5) 
-  lines(c(1,1.3), c(-1,-0.5), col="darkgreen", lwd=5) 
+  lines(c(0.85,1.15), c(-0.75,-0.75), col="blue", lwd=3)
+  lines(c(1,0.7), c(-1,-0.5), col="darkgreen", lwd=5)
+  lines(c(1,1.3), c(-1,-0.5), col="darkgreen", lwd=5)
   text(1.8,-0.75,paste0("H = ", round(H, 2), "\t m"), col="blue")
   text(1,-1.2,paste0("z1 = ", round(z1, 1), "  z2 = ", round(z2, 1)))
   return(paste0("Fr=",round(Qmax/(H*(H*z1+H*z2)/2)/sqrt(9.81*H),2), "  Vel=",round(Qmax/(H*(H*z1+H*z2)/2),2), " m/s"))
 }
-if(type=="crc"){    
+if(type=="crc"){
   f <- function(a) {abs( (1/n)*(S^0.5)*(D/4)*(pi*a/360 - sin(a*pi/180)/2)*((D/4)*(1 - 360*sin(a*pi/180)/(2*pi*a)))^(2/3)  - Qmax)}
   res <- optimize(interval=c(0,180),f)
   H <- D*(2-cos(res$minimum*pi/180))/4
   # PIPEhttp://127.0.0.1:43059/graphics/plot_zoom_png?width=500&height=588
-  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3) 
+  lines(c(0.7,1.3), c(-0.75,-0.75), col="blue", lwd=3)
   radius = 0.3
   center_x = 1
   center_y = -0.75
