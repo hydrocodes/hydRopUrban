@@ -69,7 +69,7 @@ rational <- function(crunoff = 0.95, intensity = 2.9, area = 0.57, time.con = 0.
   mat[is.na(mat)] <- 0
 
   hy_df <- data.frame(Hours = seq(from = as.POSIXct("2022-01-01 00:00:00 -05"),
-                                  length.out = ncol(mat), by = paste0(dt*60, ' mins')),
+                                  length.out = ncol(mat), by = paste0(dt*60*60, ' secs')),
                       Discharge = colSums(mat), t(mat))
   names(hy_df)[3:(2+length(Qp))] <- paste0('Discharge_s', 1:length(Qp))
   print(paste0("Qpeak = ", round(max(hy_df[,2]),2),
